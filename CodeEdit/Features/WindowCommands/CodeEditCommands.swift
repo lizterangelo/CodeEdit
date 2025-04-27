@@ -18,6 +18,7 @@ struct CodeEditCommands: Commands {
         FindCommands()
         NavigateCommands()
         if sourceControlIsEnabled { SourceControlCommands() }
+        AiderCommands()
         ExtensionCommands()
         WindowCommands()
         HelpCommands()

@@ -51,6 +51,38 @@ extension CodeEditWindowController {
             id: "toggle_right_sidebar",
             command: { [weak self] in self?.toggleLastPanel() }
         )
+        
+        CommandManager.shared.addCommand(
+            name: "Start Aider",
+            title: "Start Aider AI Assistant",
+            id: "start_aider",
+            command: {
+                guard let windowController = NSApp.keyWindow?.windowController as? CodeEditWindowController,
+                      let workspace = windowController.workspace,
+                      let workspacePath = workspace.fileURL?.path else {
+                    NSSound.beep()
+                    return
+                }
+                
+                NSApp.sendAction(Selector("startAiderAction:"), to: NSApp, from: nil)
+            }
+        )
+        
+        CommandManager.shared.addCommand(
+            name: "Start Aider with Options",
+            title: "Start Aider AI Assistant with Custom Options",
+            id: "start_aider_with_options",
+            command: {
+                guard let windowController = NSApp.keyWindow?.windowController as? CodeEditWindowController,
+                      let workspace = windowController.workspace,
+                      let workspacePath = workspace.fileURL?.path else {
+                    NSSound.beep()
+                    return
+                }
+                
+                NSApp.sendAction(Selector("startAiderWithOptionsAction:"), to: NSApp, from: nil)
+            }
+        )
     }
 
     // Listen to changes in all tabs/files

@@ -285,6 +285,8 @@
 				B658FB2A27DA9E0F00EA4DBD /* Resources */,
 				2B18499A27F8A7A0005119F0 /* Mark // swiftlint:disable:all as errors | Run Script */,
 				04ADA0CC27E6043B00BF00B2 /* Add TODO/FIXME as warnings | Run Script */,
+				BC8CADE32841DC48007DF049 /* SwiftLint */,
+				ED81B75A2A8AB74B00F7B1AE /* Bundle Python and Aider */,
 				04C3255A2801B43A00C8DA2D /* Embed Frameworks */,
 				2BE487F528245162003F3F64 /* Embed Foundation Extensions */,
 				6C6BD6FD29CD154900235D17 /* Embed ExtensionKit ExtensionPoint */,
@@ -509,6 +511,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"\\/\\/ swiftlint:disable all\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ error: Usage of \\$1 is prohibited/\"\n";
+		};
+		BC8CADE32841DC48007DF049 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed.\"\nfi\n";
+		};
+		ED81B75A2A8AB74B00F7B1AE /* Bundle Python and Aider */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle Python and Aider";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Copy script to temporary location and run from there\nTEMP_SCRIPT=$(mktemp)\ncp \"${SRCROOT}/Scripts/bundle_python_aider.sh\" \"$TEMP_SCRIPT\"\nchmod +x \"$TEMP_SCRIPT\"\n\"$TEMP_SCRIPT\"\nrm \"$TEMP_SCRIPT\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

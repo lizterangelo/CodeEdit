@@ -31,6 +31,8 @@ struct CodeEditApp: App {
 
             ExtensionManagerWindow()
 
+            AiderLoadingWindow()
+
             AboutWindow()
 
             SettingsWindow()

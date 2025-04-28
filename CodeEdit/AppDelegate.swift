@@ -23,6 +23,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         enableWindowSizeSaveOnQuit()
         Settings.shared.preferences.general.appAppearance.applyAppearance()
         checkForFilesToOpen()
+        
+        // Setup notification observers
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(openAiderInstallationWindow),
+            name: Notification.Name("OpenAiderInstallationWindow"),
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(showMainEditorWindow),
+            name: Notification.Name("ShowMainEditorWindow"),
+            object: nil
+        )
+        
+        // Check if Aider is installed, and show installation window if needed
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            print("Checking Aider installation status after delay...")
+            
+            // Normal flow
+            if !AiderInstallationManager.shared.isInstalled {
+                AiderInstallationManager.shared.showInstallationWindow()
+            }
+        }
 
         NSApp.closeWindow(.welcome, .about)
 
@@ -54,7 +79,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             }
 
             if needToHandleOpen {
-                self.handleOpen()
+//                self.handleOpen()
             }
         }
     }
@@ -69,7 +94,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         guard flag else {
-            handleOpen()
+//            handleOpen()
             return false
         }
 
@@ -181,6 +206,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         updater.checkForUpdates()
     }
 
+    @IBAction private func openAiderInstaller(_ sender: Any) {
+        print("Manual trigger for Aider installation window")
+        openWindow(sceneID: .aiderInstallation)
+    }
+
     /// Tries to focus a window with specified view content type.
     /// - Parameter type: The type of viewContent which hosted in a window to be focused.
     /// - Returns: `true` if window exist and focused, otherwise - `false`
@@ -269,6 +299,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         documents.forEach { workspace in
             workspace.taskManager?.stopAllTasks()
         }
+    }
+
+    // Add a selector method to open the Aider installation window
+    @objc private func openAiderInstallationWindow() {
+        print("Opening Aider installation window")
+        openWindow(sceneID: .aiderInstallation)
+    }
+
+    // Add a selector method to handle the fallback notification
+    @objc private func showMainEditorWindow() {
+        print("Received request to show main editor window")
+        handleOpen()
     }
 }
 

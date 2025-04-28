@@ -29,9 +29,22 @@ class AiderService: ObservableObject {
         return path
     }
     
+    /// Path to the bundled Aider executable in the virtual environment
+    var aiderExecutablePath: String? {
+        if let resourcePath = Bundle.main.resourcePath {
+            let execPath = "\(resourcePath)/aider/venv/bin/aider"
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: execPath) {
+                return execPath
+            }
+            print("Aider executable not found at \(execPath)")
+        }
+        return nil
+    }
+    
     /// Check if Aider is properly bundled with the application
     var isAiderAvailable: Bool {
-        aiderWrapperPath != nil
+        aiderWrapperPath != nil || aiderExecutablePath != nil
     }
     
     /// Installs Aider if it's not already installed
@@ -46,7 +59,7 @@ class AiderService: ObservableObject {
         return """
         if ! command -v aider &> /dev/null; then
             echo "Installing Aider..."
-            pip install aider-chat
+            pip3 install --user aider-chat
         else
             echo "Using system Aider"
         fi
@@ -57,14 +70,21 @@ class AiderService: ObservableObject {
     /// - Parameter workspacePath: Path to the current workspace
     /// - Returns: Command to run in the terminal
     func startAider(workspacePath: String) -> String {
-        // If we have the bundled wrapper, use it
+        // If we have the bundled wrapper, use it (preferred method)
         if let wrapperPath = aiderWrapperPath {
             let command = "cd \"\(workspacePath)\" && \"\(wrapperPath)\" -d ."
-            print("Running Aider command: \(command)")
+            print("Running Aider command through wrapper: \(command)")
             return command
         }
         
-        // Otherwise, try to install or use system Aider
+        // If we have direct access to the aider executable in the virtual environment
+        if let execPath = aiderExecutablePath {
+            let command = "cd \"\(workspacePath)\" && source \"\(resourcesDirectory)/aider/venv/bin/activate\" && \"\(execPath)\" -d ."
+            print("Running Aider command through direct executable: \(command)")
+            return command
+        }
+        
+        // Otherwise, try to install or use system Aider as fallback
         let command = """
         cd "\(workspacePath)" && {
             \(ensureAiderAvailable())
@@ -73,10 +93,11 @@ class AiderService: ObservableObject {
                 aider -d .
             else
                 echo "Failed to find or install Aider. Please make sure Python and pip are installed."
+                echo "You can install Aider manually using: pip install aider-chat"
             fi
         }
         """
-        print("Running Aider command: \(command)")
+        print("Running Aider command using system installation: \(command)")
         return command
     }
     
@@ -88,14 +109,21 @@ class AiderService: ObservableObject {
     func startAider(workspacePath: String, arguments: [String]) -> String {
         let argsString = arguments.map { $0.replacingOccurrences(of: "\"", with: "\\\"") }.joined(separator: " ")
         
-        // If we have the bundled wrapper, use it
+        // If we have the bundled wrapper, use it (preferred method)
         if let wrapperPath = aiderWrapperPath {
             let command = "cd \"\(workspacePath)\" && \"\(wrapperPath)\" \(argsString)"
-            print("Running Aider command with arguments: \(command)")
+            print("Running Aider command with arguments through wrapper: \(command)")
             return command
         }
         
-        // Otherwise, try to install or use system Aider
+        // If we have direct access to the aider executable in the virtual environment
+        if let execPath = aiderExecutablePath {
+            let command = "cd \"\(workspacePath)\" && source \"\(resourcesDirectory)/aider/venv/bin/activate\" && \"\(execPath)\" \(argsString)"
+            print("Running Aider command with arguments through direct executable: \(command)")
+            return command
+        }
+        
+        // Otherwise, try to install or use system Aider as fallback
         let command = """
         cd "\(workspacePath)" && {
             \(ensureAiderAvailable())
@@ -104,10 +132,11 @@ class AiderService: ObservableObject {
                 aider \(argsString)
             else
                 echo "Failed to find or install Aider. Please make sure Python and pip are installed."
+                echo "You can install Aider manually using: pip install aider-chat"
             fi
         }
         """
-        print("Running Aider command with arguments: \(command)")
+        print("Running Aider command with arguments using system installation: \(command)")
         return command
     }
 } 

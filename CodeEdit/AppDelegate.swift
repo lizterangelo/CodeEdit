@@ -79,7 +79,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             }
 
             if needToHandleOpen {
-                self.handleOpen()
+//                self.handleOpen()
             }
         }
     }
@@ -94,7 +94,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         guard flag else {
-            handleOpen()
+//            handleOpen()
             return false
         }
 

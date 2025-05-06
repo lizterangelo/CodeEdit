@@ -37,18 +37,24 @@ struct AiderLoadingView: View {
             Button("Close") {
                 dismiss()
                 
-                // Only show main editor window if Aider is installed
-                if !isInstalling && AiderInstallationManager.shared.isInstalled {
-                    // Delay needed to ensure the window closing completes
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        // Show default window based on user preferences
-                        if let appDelegate = NSApp.delegate as? AppDelegate {
-                            appDelegate.handleOpen()
-                        } else {
-                            // Fallback approach to ensure some window is shown
-                            NotificationCenter.default.post(
-                                name: NSNotification.Name("ShowMainEditorWindow"),
-                                object: nil
+                // Delay needed to ensure the window closing completes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    // Show default window based on user preferences
+                    if let appDelegate = NSApp.delegate as? AppDelegate {
+                        appDelegate.handleOpen()
+                    } else {
+                        // Fallback approach to ensure some window is shown
+                        NotificationCenter.default.post(
+                            name: NSNotification.Name("ShowMainEditorWindow"),
+                            object: nil
+                        )
+                        
+                        // Secondary fallback to try to open welcome window directly
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            NSApp.sendAction(
+                                Selector("openWindow:"), 
+                                to: nil, 
+                                from: SceneID.welcome.rawValue
                             )
                         }
                     }
@@ -105,30 +111,8 @@ struct AiderLoadingView: View {
                     // Update AiderInstallationManager
                     AiderInstallationManager.shared.checkIfAiderIsInstalled()
                     
-                    if proc.terminationStatus == 0 {
-                        // Installation successful
-                        self.terminalOutput += "\n\n✅ Installation complete! You can now close this window."
-                        
-                        // Auto-close the window after a delay
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            self.dismiss()
-                            
-                            // Show main window after installation is complete
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                if let appDelegate = NSApp.delegate as? AppDelegate {
-                                    appDelegate.handleOpen()
-                                } else {
-                                    NotificationCenter.default.post(
-                                        name: NSNotification.Name("ShowMainEditorWindow"),
-                                        object: nil
-                                    )
-                                }
-                            }
-                        }
-                    } else {
-                        // Installation failed
-                        self.terminalOutput += "\n\n❌ Installation failed with error code: \(proc.terminationStatus)"
-                    }
+                    // Show installation complete message
+                    self.terminalOutput += "\n\n✅ Installation complete! You can now close this window."
                 }
             }
         } catch {

@@ -25,7 +25,7 @@ struct InspectorAreaView: View {
     }
 
     private func updateTabs() {
-        var tabs: [InspectorTab] = [.file, .gitHistory]
+        var tabs: [InspectorTab] = [.file, .gitHistory, .aiChat]
 
         if showInternalDevelopmentInspector {
             tabs.append(.internalDevelopment)

@@ -13,7 +13,11 @@ enum InspectorTab: WorkspacePanelTab {
     case file
     case gitHistory
     case internalDevelopment
+<<<<<<< HEAD
     case terminalChat
+=======
+    case aiChat
+>>>>>>> parent of 85cd3641 (Revert "ai chat")
     case uiExtension(endpoint: AppExtensionIdentity, data: ResolvedSidebar.SidebarStore)
 
     var systemImage: String {
@@ -24,8 +28,13 @@ enum InspectorTab: WorkspacePanelTab {
             return "clock"
         case .internalDevelopment:
             return "hammer"
+<<<<<<< HEAD
         case .terminalChat:
             return "terminal"
+=======
+        case .aiChat:
+            return "message"
+>>>>>>> parent of 85cd3641 (Revert "ai chat")
         case .uiExtension(_, let data):
             return data.icon ?? "e.square"
         }
@@ -46,8 +55,13 @@ enum InspectorTab: WorkspacePanelTab {
             return "History Inspector"
         case .internalDevelopment:
             return "Internal Development"
+<<<<<<< HEAD
         case .terminalChat:
             return "Terminal Chat"
+=======
+        case .aiChat:
+            return "AI Chat"
+>>>>>>> parent of 85cd3641 (Revert "ai chat")
         case .uiExtension(_, let data):
             return data.help ?? data.sceneID
         }
@@ -61,8 +75,13 @@ enum InspectorTab: WorkspacePanelTab {
             HistoryInspectorView()
         case .internalDevelopment:
             InternalDevelopmentInspectorView()
+<<<<<<< HEAD
         case .terminalChat:
             TerminalChatView()
+=======
+        case .aiChat:
+            AIChatInspectorView()
+>>>>>>> parent of 85cd3641 (Revert "ai chat")
         case let .uiExtension(endpoint, data):
             ExtensionSceneView(with: endpoint, sceneID: data.sceneID)
         }

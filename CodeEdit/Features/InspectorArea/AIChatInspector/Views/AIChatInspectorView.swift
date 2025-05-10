@@ -5,6 +5,7 @@ struct AIChatInspectorView: View {
     @EnvironmentObject var workspace: WorkspaceDocument
     @State private var terminalOutput: String = "Initializing aider..."
     @State private var isRunning: Bool = false
+    @State private var apiKey: String = ""
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -44,8 +45,44 @@ struct AIChatInspectorView: View {
             .padding([.horizontal, .bottom])
         }
         .onAppear {
-            runAiderCommand()
+            fetchApiKey { key in
+                self.apiKey = key
+                runAiderCommand()
+            }
         }
+    }
+    
+    private func fetchApiKey(completion: @escaping (String) -> Void) {
+        // URL to your Google Cloud Function
+        guard let url = URL(string: "https://pythoninstallation-369680016890.us-central1.run.app") else {
+            terminalOutput += "Error: Invalid API URL\n"
+            completion("")
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.terminalOutput += "Error fetching API key: \(error.localizedDescription)\n"
+                    completion("")
+                    return
+                }
+                
+                guard let data = data,
+                      let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                      let apiKey = jsonResponse["pythonCode"] as? String else {
+                    self.terminalOutput += "Error: Invalid response format\n"
+                    completion("")
+                    return
+                }
+                
+                self.terminalOutput += "API key fetched successfully\n"
+                completion(apiKey)
+            }
+        }
+        
+        terminalOutput += "Fetching API key...\n"
+        task.resume()
     }
     
     private func runAiderCommand() {
@@ -62,14 +99,16 @@ struct AIChatInspectorView: View {
             return
         }
         
-        terminalOutput = "$ cd \(workspacePath) && \(aiderPath) --browser\n"
+        // Include the API key in the command
+        terminalOutput += "$ export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) --browser\n"
         
         // Create and configure the process
         let process = Process()
         let pipe = Pipe()
         
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["bash", "-c", "cd \(workspacePath) && \(aiderPath) --browser"]
+        // Set the GEMINI_API_KEY environment variable before running the command
+        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) --no-browser"]
         process.standardOutput = pipe
         process.standardError = pipe
         

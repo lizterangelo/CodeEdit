@@ -106,7 +106,7 @@ final class BackgroundAIService: ObservableObject {
         }
         
         // Destination path in the workspace
-        let destinationPath = "\(workspacePath)/QA_INSTRUCTIONS.md"
+        let destinationPath = "\(workspacePath)/.aider.qa_instructions.md"
         
         do {
             // Read the content from the bundle file
@@ -115,7 +115,7 @@ final class BackgroundAIService: ObservableObject {
             // Write the content to the destination file
             try content.write(toFile: destinationPath, atomically: true, encoding: .utf8)
             
-            print("Successfully copied QA_INSTRUCTIONS.md to workspace")
+            print("Successfully copied .aider.qa_instructions.md to workspace")
             completion(true)
         } catch {
             print("Error copying QA instructions file: \(error.localizedDescription)")
@@ -130,6 +130,11 @@ final class BackgroundAIService: ObservableObject {
         // Get the home directory path dynamically for the current user
         let homeDirectory = FileManager.default.homeDirectoryForCurrentUser.path
         let aiderPath = "\(homeDirectory)/.local/bin/aider"
+        let aiModel = "--model gemini/gemini-2.5-flash-preview-04-17"
+        let read = "--read .aider.qa_instructions.md"
+        let commits = "--no-auto-commits"
+        let gitignore = "--gitignore"
+        
         
         print("Starting background AI service with Aider for workspace: \(workspaceID)...")
         
@@ -140,7 +145,7 @@ final class BackgroundAIService: ObservableObject {
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
         // Set the GEMINI_API_KEY environment variable before running the command
         // Note: We're now using --browser flag to open the web interface
-        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) --model gemini/gemini-2.5-flash-preview-04-17 --read QA_INSTRUCTIONS.md --browser"]
+        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) \(aiModel) \(read) --browser \(commits) --gitignore"]
         process.standardOutput = pipe
         process.standardError = pipe
         

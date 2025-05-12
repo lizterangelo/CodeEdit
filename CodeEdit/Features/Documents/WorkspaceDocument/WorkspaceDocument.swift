@@ -18,6 +18,12 @@ final class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
     @Published var navigatorFilter: String = ""
     /// Whether the workspace only shows files with changes.
     @Published var sourceControlFilter = false
+    
+    // Add a unique ID for each workspace
+    let id = UUID()
+    
+    // Add BackgroundAIService property
+    var aiService: BackgroundAIService?
 
     private var workspaceState: [String: Any] {
         get {
@@ -50,6 +56,9 @@ final class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
 
     override init() {
         super.init()
+        
+        // Initialize AI service for this workspace
+        self.aiService = BackgroundAIService(workspaceID: id)
 
         // Observe changes to notification panel
         notificationPanel.objectWillChange
@@ -61,6 +70,9 @@ final class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
     }
 
     deinit {
+        // Stop AI service if running
+        aiService?.stop()
+        
         cancellables.forEach { $0.cancel() }
         NotificationCenter.default.removeObserver(self)
     }
@@ -169,6 +181,9 @@ final class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
     override func read(from url: URL, ofType typeName: String) throws {
         try initWorkspaceState(url)
         
+        // Start the AI service for this workspace
+        aiService?.start(for: url)
+        
         // Post notification that workspace has opened
         NotificationCenter.default.post(name: NSNotification.Name("WorkspaceDidOpen"), object: self)
     }
@@ -181,6 +196,10 @@ final class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
         super.close()
         editorManager?.saveRestorationState(self)
         utilityAreaModel?.saveRestorationState(self)
+
+        // Stop the AI service for this workspace
+        aiService?.stop()
+        aiService = nil
 
         cancellables.forEach({ $0.cancel() })
         statusBarViewModel = nil

@@ -85,8 +85,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Ensure background services are stopped
-        BackgroundAIService.shared.stop()
+        // Ensure all background AI services are stopped for each workspace
+        let documents = CodeEditDocumentController.shared.documents.compactMap({ $0 as? WorkspaceDocument })
+        for workspace in documents {
+            workspace.aiService?.stop()
+        }
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
@@ -299,10 +302,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         let documents = CodeEditDocumentController.shared.documents.compactMap({ $0 as? WorkspaceDocument })
         documents.forEach { workspace in
             workspace.taskManager?.stopAllTasks()
+            // Stop each workspace's AI service
+            workspace.aiService?.stop()
         }
-        
-        // Stop the background AI service
-        BackgroundAIService.shared.stop()
     }
 
     // Add a selector method to open the Aider installation window

@@ -3,26 +3,19 @@ import SwiftUI
 
 /// A service that runs Aider in the background without UI
 final class BackgroundAIService: ObservableObject {
-    static let shared = BackgroundAIService()
-    
     @Published private(set) var isRunning: Bool = false
     @Published private(set) var localhostURL: URL?
     
     private var process: Process?
     private var apiKey: String = ""
     private var workspacePath: String?
+    private var workspaceID: UUID // Add a unique identifier for each workspace
     private var terminalOutput: String = ""
     
-    private init() {
-        // Initialize but don't start the service until a workspace is opened
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(workspaceDidOpen(_:)),
-            name: NSNotification.Name("WorkspaceDidOpen"),
-            object: nil
-        )
+    init(workspaceID: UUID) {
+        self.workspaceID = workspaceID
         
-        // Also listen for application termination to clean up
+        // Listen for application termination to clean up
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(applicationWillTerminate(_:)),
@@ -63,7 +56,7 @@ final class BackgroundAIService: ObservableObject {
         isRunning = false
         self.process = nil
         self.localhostURL = nil
-        print("Background AI service stopped")
+        print("Background AI service stopped for workspace: \(workspaceID)")
     }
     
     /// Fetch the API key from the cloud function
@@ -138,7 +131,7 @@ final class BackgroundAIService: ObservableObject {
         let homeDirectory = FileManager.default.homeDirectoryForCurrentUser.path
         let aiderPath = "\(homeDirectory)/.local/bin/aider"
         
-        print("Starting background AI service with Aider...")
+        print("Starting background AI service with Aider for workspace: \(workspaceID)...")
         
         // Create and configure the process
         let process = Process()
@@ -166,13 +159,14 @@ final class BackgroundAIService: ObservableObject {
         // Set up completion handler
         process.terminationHandler = { [weak self] process in
             DispatchQueue.main.async {
-                self?.isRunning = false
-                print("Background AI service terminated with exit code \(process.terminationStatus)")
+                guard let self = self else { return }
+                self.isRunning = false
+                print("Background AI service terminated with exit code \(process.terminationStatus) for workspace: \(self.workspaceID)")
                 
                 // Close the file handle
                 pipe.fileHandleForReading.readabilityHandler = nil
-                self?.process = nil
-                self?.localhostURL = nil
+                self.process = nil
+                self.localhostURL = nil
             }
         }
         
@@ -181,7 +175,7 @@ final class BackgroundAIService: ObservableObject {
             try process.run()
             self.process = process
             self.isRunning = true
-            print("Background AI service started successfully")
+            print("Background AI service started successfully for workspace: \(workspaceID)")
         } catch {
             print("Error starting background AI service: \(error.localizedDescription)")
             self.isRunning = false
@@ -201,12 +195,13 @@ final class BackgroundAIService: ObservableObject {
                 let urlString = String(output[range])
                 if let url = URL(string: urlString) {
                     self.localhostURL = url
-                    print("Found Aider web interface URL: \(urlString)")
+                    print("Found Aider web interface URL: \(urlString) for workspace: \(workspaceID)")
                     
-                    // Post notification that the URL is available
+                    // Post notification that the URL is available with workspace ID
                     NotificationCenter.default.post(
                         name: NSNotification.Name("AiderWebInterfaceURLAvailable"),
-                        object: url
+                        object: nil,
+                        userInfo: ["url": url, "workspaceID": workspaceID]
                     )
                     return
                 }
@@ -216,21 +211,16 @@ final class BackgroundAIService: ObservableObject {
     
     // MARK: - Notification Handlers
     
-    @objc private func workspaceDidOpen(_ notification: Notification) {
-        // Extract workspace URL from notification
-        if let workspace = notification.object as? WorkspaceDocument, let fileURL = workspace.fileURL {
-            // Stop any existing service first
-            if isRunning {
-                stop()
-            }
-            
-            // Start the service for the new workspace
-            start(for: fileURL)
-        }
-    }
-    
     @objc private func applicationWillTerminate(_ notification: Notification) {
         // Clean up when the application is about to terminate
         stop()
+    }
+    
+    deinit {
+        // Ensure the service is stopped when the object is deallocated
+        stop()
+        
+        // Remove observer
+        NotificationCenter.default.removeObserver(self)
     }
 } 

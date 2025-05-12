@@ -5,7 +5,6 @@ import WebKit
 /// AIChatInspectorView that embeds the Aider web interface
 struct AIChatInspectorView: View {
     @EnvironmentObject var workspace: WorkspaceDocument
-    @ObservedObject private var aiService = BackgroundAIService.shared
     @State private var webViewURL: URL?
     
     var body: some View {
@@ -19,7 +18,7 @@ struct AIChatInspectorView: View {
                     Text("AI Assistant")
                         .font(.headline)
                     
-                    if aiService.isRunning {
+                    if let aiService = workspace.aiService, aiService.isRunning {
                         ProgressView()
                             .scaleEffect(1.5)
                         
@@ -34,18 +33,21 @@ struct AIChatInspectorView: View {
             }
         }
         .onAppear {
-            // Check if URL is already available
-            if let url = aiService.localhostURL {
+            // Check if URL is already available from workspace's AI service
+            if let aiService = workspace.aiService, let url = aiService.localhostURL {
                 self.webViewURL = url
             }
             
-            // Listen for URL availability notification
+            // Listen for URL availability notification with workspace ID filtering
             NotificationCenter.default.addObserver(
                 forName: NSNotification.Name("AiderWebInterfaceURLAvailable"),
                 object: nil,
                 queue: .main
             ) { notification in
-                if let url = notification.object as? URL {
+                if let userInfo = notification.userInfo,
+                   let url = userInfo["url"] as? URL,
+                   let workspaceID = userInfo["workspaceID"] as? UUID,
+                   workspaceID == workspace.id {
                     self.webViewURL = url
                 }
             }

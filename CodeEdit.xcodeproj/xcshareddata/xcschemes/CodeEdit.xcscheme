@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
-               BuildableName = "CodeEdit.app"
-               BlueprintName = "CodeEdit"
+               BuildableName = "XLab.app"
+               BlueprintName = "XLab"
                ReferencedContainer = "container:CodeEdit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -133,8 +133,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
-            BuildableName = "CodeEdit.app"
-            BlueprintName = "CodeEdit"
+            BuildableName = "XLab.app"
+            BlueprintName = "XLab"
             ReferencedContainer = "container:CodeEdit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -150,8 +150,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
-            BuildableName = "CodeEdit.app"
-            BlueprintName = "CodeEdit"
+            BuildableName = "XLab.app"
+            BlueprintName = "XLab"
             ReferencedContainer = "container:CodeEdit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -12,7 +12,7 @@ struct WelcomeWindow: Scene {
     @ObservedObject var settings = Settings.shared
 
     var body: some Scene {
-        Window("Welcome To CodeEdit", id: SceneID.welcome.rawValue) {
+        Window("Welcome To XLab", id: SceneID.welcome.rawValue) {
             ContentView()
                 .frame(width: 740, height: 432)
                 .task {

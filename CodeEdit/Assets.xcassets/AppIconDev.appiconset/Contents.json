@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "CodeEditDev-16.png",
+      "filename" : "xlab16.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "CodeEditDev-16@2x.png",
+      "filename" : "xlab32.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "CodeEditDev-32.png",
+      "filename" : "xlab32 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "CodeEditDev-32@2x.png",
+      "filename" : "xlab64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "CodeEditDev-128.png",
+      "filename" : "xlab128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "CodeEditDev-128@2x.png",
+      "filename" : "xlab256 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "CodeEditDev-256.png",
+      "filename" : "xlab256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "CodeEditDev-256@2x.png",
+      "filename" : "xlab512.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "CodeEditDev-512.png",
+      "filename" : "xlab512 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "CodeEditDev-512@2x.png",
+      "filename" : "xlab1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

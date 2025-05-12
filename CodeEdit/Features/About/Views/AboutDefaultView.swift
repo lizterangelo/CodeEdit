@@ -42,7 +42,7 @@ struct AboutDefaultView: View {
                 .padding(.bottom, 8)
 
             VStack(spacing: 0) {
-                Text("CodeEdit")
+                Text("XLab")
                     .matchedGeometryEffect(id: "Title", in: namespace, properties: .position, anchor: .center)
                     .blur(radius: aboutMode == .about ? 0 : 10)
                     .foregroundColor(.primary)
@@ -72,32 +72,32 @@ struct AboutDefaultView: View {
         VStack {
             Spacer()
             VStack {
-                Button {
-                    aboutMode = .contributors
-                } label: {
-                    Text("Contributors")
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity)
-                }
-                .controlSize(.large)
-                .buttonStyle(.blur)
+//                Button {
+//                    aboutMode = .contributors
+//                } label: {
+//                    Text("Contributors")
+//                        .foregroundColor(.primary)
+//                        .frame(maxWidth: .infinity)
+//                }
+//                .controlSize(.large)
+//                .buttonStyle(.blur)
 
-                Button {
-                    aboutMode = .acknowledgements
-                } label: {
-                    Text("Acknowledgements")
-                        .foregroundColor(.primary)
-                        .frame(maxWidth: .infinity)
-                }
-                .controlSize(.large)
-                .buttonStyle(.blur)
+//                Button {
+//                    aboutMode = .acknowledgements
+//                } label: {
+//                    Text("Acknowledgements")
+//                        .foregroundColor(.primary)
+//                        .frame(maxWidth: .infinity)
+//                }
+//                .controlSize(.large)
+//                .buttonStyle(.blur)
 
                 VStack(spacing: 2) {
-                    Link(destination: Self.licenseURL) {
-                        Text("MIT License")
-                            .underline()
-
-                    }
+//                    Link(destination: Self.licenseURL) {
+//                        Text("MIT License")
+//                            .underline()
+//
+//                    }
                     Text(Bundle.copyrightString ?? "")
                 }
                 .textSelection(.disabled)

@@ -10,6 +10,9 @@ import SwiftUI
 struct WelcomeWindow: Scene {
 
     @ObservedObject var settings = Settings.shared
+    
+    // Check if Aider is installed before showing welcome window
+    @ObservedObject private var aiderManager = AiderInstallationManager.shared
 
     var body: some Scene {
         Window("Welcome To XLab", id: SceneID.welcome.rawValue) {
@@ -21,11 +24,24 @@ struct WelcomeWindow: Scene {
                         window.standardWindowButton(.miniaturizeButton)?.isHidden = true
                         window.standardWindowButton(.zoomButton)?.isHidden = true
                         window.isMovableByWindowBackground = true
+                        
+                        // If Aider is not installed and not checked yet, close this window
+                        if !aiderManager.isInstalled && !aiderManager.hasShownInstallationWindow {
+                            window.close()
+                            // Show Aider installation window
+                            aiderManager.showInstallationWindow()
+                        }
                     }
                 }
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
+        .commands {
+            // This prevents the welcome window from automatically opening on app launch
+            CommandGroup(replacing: .newItem) {
+                EmptyView()
+            }
+        }
     }
 
     struct ContentView: View {

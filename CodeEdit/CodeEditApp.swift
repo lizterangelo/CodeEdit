@@ -11,6 +11,9 @@ import SwiftUI
 struct CodeEditApp: App {
     @NSApplicationDelegateAdaptor var appdelegate: AppDelegate
     @ObservedObject var settings = Settings.shared
+    
+    // Flag to track if we need to show Aider installation window
+    @State private var needsAiderCheck: Bool = true
 
     let updater: SoftwareUpdater = SoftwareUpdater()
 
@@ -27,11 +30,21 @@ struct CodeEditApp: App {
 
     var body: some Scene {
         Group {
+            // Only show AiderLoadingWindow first
+            AiderLoadingWindow()
+                .handlesExternalEvents(matching: Set(arrayLiteral: "aider-installation"))
+            
+            // Other windows are conditionally shown
             WelcomeWindow()
+                .handlesExternalEvents(matching: Set(arrayLiteral: "welcome"))
+                .commands {
+                    // This ensures welcome window doesn't automatically open on launch
+                    CommandGroup(replacing: .newItem) {
+                        EmptyView()
+                    }
+                }
 
             ExtensionManagerWindow()
-
-            AiderLoadingWindow()
 
             AboutWindow()
 

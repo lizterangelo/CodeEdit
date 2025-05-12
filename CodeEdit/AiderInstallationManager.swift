@@ -14,6 +14,10 @@ final class AiderInstallationManager: ObservableObject {
     static let shared = AiderInstallationManager()
     
     @Published var isInstalled: Bool = false
+    @Published var isCheckingInstallation: Bool = false
+    
+    // Flag to track if installation window has been shown
+    @Published var hasShownInstallationWindow: Bool = false
     
     private init() {
         checkIfAiderIsInstalled()
@@ -22,6 +26,8 @@ final class AiderInstallationManager: ObservableObject {
     /// Checks if Aider is already installed
     func checkIfAiderIsInstalled() {
         print("Checking if Aider is installed...")
+        isCheckingInstallation = true
+        
         let process = Process()
         let outputPipe = Pipe()
         
@@ -39,12 +45,19 @@ final class AiderInstallationManager: ObservableObject {
             // If we get a path, aider is installed
             DispatchQueue.main.async {
                 self.isInstalled = isAiderInstalled
+                self.isCheckingInstallation = false
                 print("Aider installed: \(isAiderInstalled)")
+                
+                // If not installed and we haven't shown the window yet, show it
+                if !isAiderInstalled && !self.hasShownInstallationWindow {
+                    self.showInstallationWindow()
+                }
             }
         } catch {
             print("Error checking Aider installation: \(error)")
             DispatchQueue.main.async {
                 self.isInstalled = false
+                self.isCheckingInstallation = false
             }
         }
     }
@@ -56,9 +69,23 @@ final class AiderInstallationManager: ObservableObject {
             return
         }
         
+        // Close any welcome window that might have opened
+        NSApp.closeWindow(.welcome)
+        
         print("Posting notification to open Aider installation window")
         // Create a notification to open the window
         NotificationCenter.default.post(name: Notification.Name("OpenAiderInstallationWindow"), object: nil)
+        
+        // Mark that we've shown the window
+        hasShownInstallationWindow = true
+        
+        // Ensure the window is brought to front after a short delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if let window = NSApp.findWindow(.aiderInstallation) {
+                window.makeKeyAndOrderFront(nil)
+                window.orderFrontRegardless()
+            }
+        }
     }
     
     /// Execute a shell command

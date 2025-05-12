@@ -13,6 +13,9 @@ import OSLog
 final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "", category: "AppDelegate")
     private let updater = SoftwareUpdater()
+    
+    // Flag to track if we've already checked for Aider installation
+    private var didCheckAiderInstallation = false
 
     @Environment(\.openWindow)
     var openWindow
@@ -22,7 +25,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     func applicationDidFinishLaunching(_ notification: Notification) {
         enableWindowSizeSaveOnQuit()
         Settings.shared.preferences.general.appAppearance.applyAppearance()
-        checkForFilesToOpen()
+        
+        // Close any welcome window that might have opened automatically
+        NSApp.closeWindow(.welcome)
         
         // Setup notification observers
         NotificationCenter.default.addObserver(
@@ -32,49 +37,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             object: nil
         )
         
+        // Check if Aider is installed immediately
+        checkAiderInstallation()
         
-        // Check if Aider is installed, and show installation window if needed
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            print("Checking Aider installation status after delay...")
-            
-            // Normal flow
-            if !AiderInstallationManager.shared.isInstalled {
-                AiderInstallationManager.shared.showInstallationWindow()
-            }
-        }
-
-        // NSApp.closeWindow(.welcome, .about)
-
-        DispatchQueue.main.async {
-            var needToHandleOpen = true
-
-            // If no windows were reopened by NSQuitAlwaysKeepsWindows, do default behavior.
-            // Non-WindowGroup SwiftUI Windows are still in NSApp.windows when they are closed,
-            // So we need to think about those.
-            if NSApp.windows.count > NSApp.openSwiftUIWindows {
-                needToHandleOpen = false
-            }
-
-            for index in 0..<CommandLine.arguments.count {
-                if CommandLine.arguments[index] == "--open" && (index + 1) < CommandLine.arguments.count {
-                    let path = CommandLine.arguments[index+1]
-                    let url = URL(fileURLWithPath: path)
-
-                    CodeEditDocumentController.shared.reopenDocument(
-                        for: url,
-                        withContentsOf: url,
-                        display: true
-                    ) { document, _, _ in
-                        document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
-                    }
-
-                    needToHandleOpen = false
-                }
-            }
-
-            if needToHandleOpen {
-//                self.handleOpen()
-            }
+        // Start checking for files to open after Aider installation check
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.checkForFilesToOpen()
         }
 
         NotificationCenter.default.addObserver(
@@ -83,6 +51,57 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             name: Notification.Name("ShowMainEditorWindow"),
             object: nil
         )
+    }
+    
+    // Check Aider installation and show installation window if needed
+    private func checkAiderInstallation() {
+        // Set flag to prevent multiple checks
+        didCheckAiderInstallation = true
+        
+        if !AiderInstallationManager.shared.isInstalled {
+            // Show installation window immediately
+            DispatchQueue.main.async {
+                self.openWindow(sceneID: .aiderInstallation)
+            }
+        } else {
+            // If Aider is already installed, proceed with normal app flow
+            DispatchQueue.main.async {
+                self.handlePostAiderInstallation()
+            }
+        }
+    }
+    
+    // Handle normal app flow after Aider installation check
+    private func handlePostAiderInstallation() {
+        var needToHandleOpen = true
+
+        // If no windows were reopened by NSQuitAlwaysKeepsWindows, do default behavior.
+        // Non-WindowGroup SwiftUI Windows are still in NSApp.windows when they are closed,
+        // So we need to think about those.
+        if NSApp.windows.count > NSApp.openSwiftUIWindows {
+            needToHandleOpen = false
+        }
+
+        for index in 0..<CommandLine.arguments.count {
+            if CommandLine.arguments[index] == "--open" && (index + 1) < CommandLine.arguments.count {
+                let path = CommandLine.arguments[index+1]
+                let url = URL(fileURLWithPath: path)
+
+                CodeEditDocumentController.shared.reopenDocument(
+                    for: url,
+                    withContentsOf: url,
+                    display: true
+                ) { document, _, _ in
+                    document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
+                }
+
+                needToHandleOpen = false
+            }
+        }
+
+        if needToHandleOpen {
+            handleOpen()
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -99,7 +118,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         guard flag else {
-//            handleOpen()
+            // Only handle open if Aider is installed or we've already checked
+            if AiderInstallationManager.shared.isInstalled || didCheckAiderInstallation {
+                handleOpen()
+            } else {
+                checkAiderInstallation()
+            }
             return false
         }
 
@@ -130,6 +154,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
     /// Handle urls with the form `codeedit://file/{filepath}:{line}:{column}`
     func application(_ application: NSApplication, open urls: [URL]) {
+        // First check if Aider is installed
+        if !AiderInstallationManager.shared.isInstalled && !didCheckAiderInstallation {
+            checkAiderInstallation()
+            // Store URLs for later processing after installation
+            self.pendingURLsToOpen = urls
+            return
+        }
+        
+        processURLs(urls)
+    }
+    
+    // Property to store URLs that need to be opened after Aider installation
+    private var pendingURLsToOpen: [URL]?
+    
+    // Process URLs to open
+    private func processURLs(_ urls: [URL]) {
         for url in urls {
             let file = URL(fileURLWithPath: url.path).path.split(separator: ":")
             let filePath = URL(fileURLWithPath: String(file[0]))
@@ -194,14 +234,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     // MARK: - Open windows
 
     @IBAction private func openWelcome(_ sender: Any) {
-        openWindow(sceneID: .welcome)
+        // Check Aider installation first
+        if !AiderInstallationManager.shared.isInstalled && !didCheckAiderInstallation {
+            checkAiderInstallation()
+        } else {
+            openWindow(sceneID: .welcome)
+        }
     }
 
     @IBAction private func openAbout(_ sender: Any) {
-        openWindow(sceneID: .about)
+        // Check Aider installation first
+        if !AiderInstallationManager.shared.isInstalled && !didCheckAiderInstallation {
+            checkAiderInstallation()
+        } else {
+            openWindow(sceneID: .about)
+        }
     }
 
     @IBAction func openFeedback(_ sender: Any) {
+        // Check Aider installation first
+        if !AiderInstallationManager.shared.isInstalled && !didCheckAiderInstallation {
+            checkAiderInstallation()
+            return
+        }
+        
         if tryFocusWindow(of: FeedbackView.self) { return }
 
         FeedbackView().showWindow()
@@ -252,7 +308,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 
         if let filesToOpen = defaults.string(forKey: "openInCEFiles") {
             let files = filesToOpen.split(separator: ";")
-
+            
+            // Check Aider installation first
+            if !AiderInstallationManager.shared.isInstalled && !didCheckAiderInstallation {
+                checkAiderInstallation()
+                
+                // Store file paths for later processing
+                self.pendingFilesToOpen = files.map { String($0) }
+                return
+            }
+            
+            // Process files
             for filePath in files {
                 let fileURL = URL(fileURLWithPath: String(filePath))
                 CodeEditDocumentController.shared.reopenDocument(
@@ -271,6 +337,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             self?.checkForFilesToOpen()
         }
     }
+    
+    // Property to store file paths that need to be opened after Aider installation
+    private var pendingFilesToOpen: [String]?
 
     /// Enable window size restoring on app relaunch after quitting.
     private func enableWindowSizeSaveOnQuit() {
@@ -317,6 +386,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     // Add a selector method to handle the fallback notification
     @objc private func showMainEditorWindow() {
         print("Received request to show main editor window")
+        
+        // Process any pending URLs or files after installation
+        if let pendingURLs = pendingURLsToOpen {
+            processURLs(pendingURLs)
+            self.pendingURLsToOpen = nil
+        }
+        
+        if let pendingFiles = pendingFilesToOpen {
+            for filePath in pendingFiles {
+                let fileURL = URL(fileURLWithPath: filePath)
+                CodeEditDocumentController.shared.reopenDocument(
+                    for: fileURL,
+                    withContentsOf: fileURL,
+                    display: true
+                ) { document, _, _ in
+                    document?.windowControllers.first?.synchronizeWindowTitleWithDocumentName()
+                }
+            }
+            self.pendingFilesToOpen = nil
+        }
+        
         handleOpen()
     }
 }

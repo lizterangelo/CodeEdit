@@ -65,30 +65,7 @@ struct AiderLoadingView: View {
 //            .cornerRadius(8)
             
             Button("Close") {
-                dismiss()
-                
-                // Delay needed to ensure the window closing completes
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    // Show default window based on user preferences
-                    if let appDelegate = NSApp.delegate as? AppDelegate {
-                        appDelegate.handleOpen()
-                    } else {
-                        // Fallback approach to ensure some window is shown
-                        NotificationCenter.default.post(
-                            name: NSNotification.Name("ShowMainEditorWindow"),
-                            object: nil
-                        )
-                        
-                        // Secondary fallback to try to open welcome window directly
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            NSApp.sendAction(
-                                Selector("openWindow:"), 
-                                to: nil, 
-                                from: SceneID.welcome.rawValue
-                            )
-                        }
-                    }
-                }
+                closeAndShowMainWindow()
             }
             .disabled(isInstalling)
         }
@@ -97,6 +74,19 @@ struct AiderLoadingView: View {
         .onAppear {
             print("AiderLoadingView appeared")
             installAider()
+        }
+    }
+    
+    private func closeAndShowMainWindow() {
+        dismiss()
+        
+        // Delay needed to ensure the window closing completes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // Notify that we should show the main editor window
+            NotificationCenter.default.post(
+                name: NSNotification.Name("ShowMainEditorWindow"),
+                object: nil
+            )
         }
     }
     
@@ -283,30 +273,7 @@ struct AiderLoadingView: View {
                         
                         // Automatically close after successful installation
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                            self.dismiss()
-                            
-                            // Delay needed to ensure the window closing completes
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                // Show default window based on user preferences
-                                if let appDelegate = NSApp.delegate as? AppDelegate {
-                                    appDelegate.handleOpen()
-                                } else {
-                                    // Fallback approach to ensure some window is shown
-                                    NotificationCenter.default.post(
-                                        name: NSNotification.Name("ShowMainEditorWindow"),
-                                        object: nil
-                                    )
-                                    
-                                    // Secondary fallback to try to open welcome window directly
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                        NSApp.sendAction(
-                                            Selector("openWindow:"), 
-                                            to: nil, 
-                                            from: SceneID.welcome.rawValue
-                                        )
-                                    }
-                                }
-                            }
+                            self.closeAndShowMainWindow()
                         }
                     } else {
                         print("Aider post-installation failed with status: \(proc.terminationStatus)")
@@ -328,20 +295,6 @@ struct AiderLoadingView: View {
                 AiderInstallationManager.shared.checkIfAiderIsInstalled()
             }
         }
-    }
-}
-
-/// Window for displaying Aider installation progress
-struct AiderLoadingWindow: Scene {
-    var body: some Scene {
-        Window("Installing AI coding assistant tools", id: "aider-installation") {
-            AiderLoadingView()
-                .onAppear {
-                    print("AiderLoadingWindow Scene appeared")
-                }
-        }
-        .defaultSize(width: 650, height: 450)
-        .windowResizability(.contentSize)
     }
 }
 

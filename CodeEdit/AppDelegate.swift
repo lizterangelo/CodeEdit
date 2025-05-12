@@ -85,7 +85,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-
+        // Ensure background services are stopped
+        BackgroundAIService.shared.stop()
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
@@ -299,6 +300,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         documents.forEach { workspace in
             workspace.taskManager?.stopAllTasks()
         }
+        
+        // Stop the background AI service
+        BackgroundAIService.shared.stop()
     }
 
     // Add a selector method to open the Aider installation window

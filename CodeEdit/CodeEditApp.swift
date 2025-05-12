@@ -21,6 +21,8 @@ struct CodeEditApp: App {
         )
 
         _ = CodeEditDocumentController.shared
+        // Initialize the BackgroundAIService
+        _ = BackgroundAIService.shared
         NSMenuItem.swizzle()
         NSSplitViewItem.swizzle()
     }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 73;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -116,13 +116,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B62454482D78A3CC009A86D1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = B658FB2B27DA9E0F00EA4DBD /* CodeEdit */;
-		};
 		B62454D02D78A3D8009A86D1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -133,18 +126,8 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		B62454492D78A3CC009A86D1 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 6C6BD6FD29CD154900235D17 /* Embed ExtensionKit ExtensionPoint */;
-			membershipExceptions = (
-				Features/Extensions/codeedit.extension.appextensionpoint,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B624520B2D78A3CC009A86D1 /* CodeEdit */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B62454482D78A3CC009A86D1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, B62454492D78A3CC009A86D1 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = CodeEdit; sourceTree = "<group>"; };
+		B624520B2D78A3CC009A86D1 /* CodeEdit */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CodeEdit; sourceTree = "<group>"; };
 		B624544F2D78A3D3009A86D1 /* Configs */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Configs; sourceTree = "<group>"; };
 		B62454602D78A3D4009A86D1 /* CodeEditUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CodeEditUITests; sourceTree = "<group>"; };
 		B62454A32D78A3D4009A86D1 /* CodeEditTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CodeEditTests; sourceTree = "<group>"; };
@@ -397,6 +380,7 @@
 				};
 			};
 			buildConfigurationList = B658FB2727DA9E0F00EA4DBD /* Build configuration list for PBXProject "CodeEdit" */;
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -421,7 +405,6 @@
 				6CB94D012CA1205100E8651C /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 				6CF368562DBBD274006A77FD /* XCRemoteSwiftPackageReference "CodeEditSourceEditor" */,
 			);
-			preferredProjectObjectVersion = 55;
 			productRefGroup = B658FB2D27DA9E0F00EA4DBD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

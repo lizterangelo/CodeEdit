@@ -168,6 +168,9 @@ final class WorkspaceDocument: NSDocument, ObservableObject, NSToolbarDelegate {
 
     override func read(from url: URL, ofType typeName: String) throws {
         try initWorkspaceState(url)
+        
+        // Post notification that workspace has opened
+        NotificationCenter.default.post(name: NSNotification.Name("WorkspaceDidOpen"), object: self)
     }
 
     override func write(to url: URL, ofType typeName: String) throws {}

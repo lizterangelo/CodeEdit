@@ -147,7 +147,7 @@ final class BackgroundAIService: ObservableObject {
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
         // Set the GEMINI_API_KEY environment variable before running the command
         // Note: We're now using --browser flag to open the web interface
-        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) --model gemini --read QA_INSTRUCTIONS.md --browser"]
+        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) --model gemini/gemini-2.5-flash-preview-04-17 --read QA_INSTRUCTIONS.md --browser"]
         process.standardOutput = pipe
         process.standardError = pipe
         

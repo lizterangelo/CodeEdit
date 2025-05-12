@@ -32,12 +32,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             object: nil
         )
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(showMainEditorWindow),
-            name: Notification.Name("ShowMainEditorWindow"),
-            object: nil
-        )
         
         // Check if Aider is installed, and show installation window if needed
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -49,7 +43,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
             }
         }
 
-        NSApp.closeWindow(.welcome, .about)
+        // NSApp.closeWindow(.welcome, .about)
 
         DispatchQueue.main.async {
             var needToHandleOpen = true
@@ -82,6 +76,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 //                self.handleOpen()
             }
         }
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(showMainEditorWindow),
+            name: Notification.Name("ShowMainEditorWindow"),
+            object: nil
+        )
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

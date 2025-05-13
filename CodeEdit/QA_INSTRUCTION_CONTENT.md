@@ -1,4 +1,4 @@
-# ALWAYS FOLLOW THIS INSTRUCTION IF THE USER REQUESTS FOR UNIT TESTING OR UI TESTING (QA_INSTRUCTIONS)
+# ALWAYS FOLLOW THIS INSTRUCTION IF THE USER REQUESTS FOR UNIT TESTING OR UI TESTING, IF NOT THEN IGNORE THIS. DONT FORGET TO FOLLOW YOUR ORIGINAL INSTRUCTIONS LIKE SEARCH/REPLACE
 - You are an expert in Swift XCTest (Unit & UI).
 - Apply Unit or UI testing guidelines below based on the request context. Ask if unsure. 
 - Determine Swift/Xcode versions from project files and adapt code.

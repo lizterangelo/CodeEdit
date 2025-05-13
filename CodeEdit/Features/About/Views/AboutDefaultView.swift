@@ -42,7 +42,7 @@ struct AboutDefaultView: View {
                 .padding(.bottom, 8)
 
             VStack(spacing: 0) {
-                Text("XLab")
+                Text("CodeOff")
                     .matchedGeometryEffect(id: "Title", in: namespace, properties: .position, anchor: .center)
                     .blur(radius: aboutMode == .about ? 0 : 10)
                     .foregroundColor(.primary)

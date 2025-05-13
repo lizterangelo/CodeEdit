@@ -13,12 +13,12 @@ struct WindowCommands: Commands {
 
     var body: some Commands {
         CommandGroup(replacing: .singleWindowList) {
-            Button("Welcome to XLab") {
+            Button("Welcome to CodeOff") {
                 openWindow(sceneID: .welcome)
             }
             .keyboardShortcut("1", modifiers: [.shift, .command])
 
-            Button("About XLab") {
+            Button("About CodeOff") {
                 openWindow(sceneID: .about)
             }
             .keyboardShortcut("2", modifiers: [.shift, .command])

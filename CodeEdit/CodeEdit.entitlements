@@ -5,7 +5,7 @@
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>$(TeamIdentifierPrefix)</string>
-		<string>app.lizter.XLab.shared</string>
+		<string>app.lizter.CodeOff.shared</string>
 	</array>
 	<key>com.apple.security.cs.allow-jit</key>
 	<true/>

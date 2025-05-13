@@ -15,7 +15,7 @@ struct WelcomeWindow: Scene {
     @ObservedObject private var aiderManager = AiderInstallationManager.shared
 
     var body: some Scene {
-        Window("Welcome To XLab", id: SceneID.welcome.rawValue) {
+        Window("Welcome To CodeOff", id: SceneID.welcome.rawValue) {
             ContentView()
                 .frame(width: 740, height: 432)
                 .task {

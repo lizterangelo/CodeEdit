@@ -43,7 +43,7 @@
 
 //Editor Screen
 "Open file from sidebar"="Open file from sidebar";
-"XLab cannot open this file because its file type is not supported." = "XLab cannot open this file because its file type is not supported.";
+"CodeOff cannot open this file because its file type is not supported." = "CodeOff cannot open this file because its file type is not supported.";
 
 // Inspector Sidebar
 "File Inspector"="File Inspector";
@@ -60,7 +60,7 @@
 
 
 // Welcome Screen
-"Welcome to XLab" = "Welcome to XLab";
+"Welcome to CodeOff" = "Welcome to CodeOff";
 "Version %@ (%@)" = "Version %@ (%@)";
 "No Recent Projects" = "No Recent Projects";
 

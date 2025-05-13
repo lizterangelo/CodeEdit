@@ -92,7 +92,7 @@ struct WelcomeView: View {
 
     /// Get program and operating system information
     private func copyInformation() {
-        var copyString = "XLab: \(appVersion)\(appVersionPostfix) (\(appBuild))\n"
+        var copyString = "CodeOff: \(appVersion)\(appVersionPostfix) (\(appBuild))\n"
 
         copyString.append("macOS: \(macOSVersion)\n")
 
@@ -149,7 +149,7 @@ struct WelcomeView: View {
                     .resizable()
                     .frame(width: 128, height: 128)
             }
-            Text(NSLocalizedString("XLab", comment: ""))
+            Text(NSLocalizedString("CodeOff", comment: ""))
                 .font(.system(size: 36, weight: .bold))
             Text(
                 String(

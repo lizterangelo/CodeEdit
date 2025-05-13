@@ -10,7 +10,7 @@
 		2816F594280CF50500DD548B /* CodeEditSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 2816F593280CF50500DD548B /* CodeEditSymbols */; };
 		283BDCBD2972EEBD002AFF81 /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 283BDCBC2972EEBD002AFF81 /* Package.resolved */; };
 		284DC8512978BA2600BF2770 /* .all-contributorsrc in Resources */ = {isa = PBXBuildFile; fileRef = 284DC8502978BA2600BF2770 /* .all-contributorsrc */; };
-		2BE487F428245162003F3F64 /* OpenWithXLab.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2BE487EC28245162003F3F64 /* OpenWithXLab.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2BE487F428245162003F3F64 /* OpenWithCodeOff.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2BE487EC28245162003F3F64 /* OpenWithCodeOff.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		30CB64912C16CA8100CC8A9E /* LanguageServerProtocol in Frameworks */ = {isa = PBXBuildFile; productRef = 30CB64902C16CA8100CC8A9E /* LanguageServerProtocol */; };
 		30CB64942C16CA9100CC8A9E /* LanguageClient in Frameworks */ = {isa = PBXBuildFile; productRef = 30CB64932C16CA9100CC8A9E /* LanguageClient */; };
 		583E529C29361BAB001AB554 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 583E529B29361BAB001AB554 /* SnapshotTesting */; };
@@ -83,7 +83,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				2BE487F428245162003F3F64 /* OpenWithXLab.appex in Embed Foundation Extensions */,
+				2BE487F428245162003F3F64 /* OpenWithCodeOff.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,15 +103,15 @@
 /* Begin PBXFileReference section */
 		283BDCBC2972EEBD002AFF81 /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = CodeEdit.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = "<group>"; };
 		284DC8502978BA2600BF2770 /* .all-contributorsrc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".all-contributorsrc"; sourceTree = "<group>"; };
-		2BE487EC28245162003F3F64 /* OpenWithXLab.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenWithXLab.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE487EC28245162003F3F64 /* OpenWithCodeOff.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OpenWithCodeOff.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		589F3E342936185400E1A4DA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		58F2EACE292FB2B0004A9BDE /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 		6C67413D2C44A28C00AABDF5 /* ProjectNavigatorViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectNavigatorViewController+DataSource.swift"; sourceTree = "<group>"; };
 		6C67413F2C44A2A200AABDF5 /* ProjectNavigatorViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProjectNavigatorViewController+Delegate.swift"; sourceTree = "<group>"; };
 		6C9619262C3F285C009733CE /* CodeEditTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CodeEditTestPlan.xctestplan; sourceTree = "<group>"; };
-		B658FB2C27DA9E0F00EA4DBD /* XLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B658FB2C27DA9E0F00EA4DBD /* CodeOff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeOff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B658FB3D27DA9E1000EA4DBD /* CodeEditTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeEditTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B658FB4727DA9E1000EA4DBD /* CodeEditUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeEditUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B658FB4727DA9E1000EA4DBD /* CodeOffUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeOffUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FF04772B6C08AC002C2C78 /* DefaultThemes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DefaultThemes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +122,7 @@
 				FinderSync.swift,
 				Media.xcassets,
 			);
-			target = 2BE487EB28245162003F3F64 /* OpenWithXLab */;
+			target = 2BE487EB28245162003F3F64 /* OpenWithCodeOff */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -229,10 +229,10 @@
 		B658FB2D27DA9E0F00EA4DBD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B658FB2C27DA9E0F00EA4DBD /* XLab.app */,
+				B658FB2C27DA9E0F00EA4DBD /* CodeOff.app */,
 				B658FB3D27DA9E1000EA4DBD /* CodeEditTests.xctest */,
-				B658FB4727DA9E1000EA4DBD /* CodeEditUITests.xctest */,
-				2BE487EC28245162003F3F64 /* OpenWithXLab.appex */,
+				B658FB4727DA9E1000EA4DBD /* CodeOffUITests.xctest */,
+				2BE487EC28245162003F3F64 /* OpenWithCodeOff.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,9 +240,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2BE487EB28245162003F3F64 /* OpenWithXLab */ = {
+		2BE487EB28245162003F3F64 /* OpenWithCodeOff */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BE487F828245162003F3F64 /* Build configuration list for PBXNativeTarget "OpenWithXLab" */;
+			buildConfigurationList = 2BE487F828245162003F3F64 /* Build configuration list for PBXNativeTarget "OpenWithCodeOff" */;
 			buildPhases = (
 				2BE487E828245162003F3F64 /* Sources */,
 				2BE487E928245162003F3F64 /* Frameworks */,
@@ -252,14 +252,14 @@
 			);
 			dependencies = (
 			);
-			name = OpenWithXLab;
+			name = OpenWithCodeOff;
 			productName = OpenWithCodeEdit;
-			productReference = 2BE487EC28245162003F3F64 /* OpenWithXLab.appex */;
+			productReference = 2BE487EC28245162003F3F64 /* OpenWithCodeOff.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		B658FB2B27DA9E0F00EA4DBD /* XLab */ = {
+		B658FB2B27DA9E0F00EA4DBD /* CodeOff */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B658FB5127DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "XLab" */;
+			buildConfigurationList = B658FB5127DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "CodeOff" */;
 			buildPhases = (
 				B658FB2827DA9E0F00EA4DBD /* Sources */,
 				B658FB2927DA9E0F00EA4DBD /* Frameworks */,
@@ -279,7 +279,7 @@
 			fileSystemSynchronizedGroups = (
 				B624520B2D78A3CC009A86D1 /* CodeEdit */,
 			);
-			name = XLab;
+			name = CodeOff;
 			packageProductDependencies = (
 				2816F593280CF50500DD548B /* CodeEditSymbols */,
 				58F2EB1D292FB954004A9BDE /* Sparkle */,
@@ -302,7 +302,7 @@
 				6C73A6D22D4F1E550012D95C /* CodeEditSourceEditor */,
 			);
 			productName = CodeEdit;
-			productReference = B658FB2C27DA9E0F00EA4DBD /* XLab.app */;
+			productReference = B658FB2C27DA9E0F00EA4DBD /* CodeOff.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B658FB3C27DA9E1000EA4DBD /* CodeEditTests */ = {
@@ -329,9 +329,9 @@
 			productReference = B658FB3D27DA9E1000EA4DBD /* CodeEditTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B658FB4627DA9E1000EA4DBD /* CodeEditUITests */ = {
+		B658FB4627DA9E1000EA4DBD /* CodeOffUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B658FB5727DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "CodeEditUITests" */;
+			buildConfigurationList = B658FB5727DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "CodeOffUITests" */;
 			buildPhases = (
 				B658FB4327DA9E1000EA4DBD /* Sources */,
 				B658FB4427DA9E1000EA4DBD /* Frameworks */,
@@ -345,11 +345,11 @@
 			fileSystemSynchronizedGroups = (
 				B62454602D78A3D4009A86D1 /* CodeEditUITests */,
 			);
-			name = CodeEditUITests;
+			name = CodeOffUITests;
 			packageProductDependencies = (
 			);
 			productName = CodeEditUITests;
-			productReference = B658FB4727DA9E1000EA4DBD /* CodeEditUITests.xctest */;
+			productReference = B658FB4727DA9E1000EA4DBD /* CodeOffUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -409,10 +409,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B658FB2B27DA9E0F00EA4DBD /* XLab */,
+				B658FB2B27DA9E0F00EA4DBD /* CodeOff */,
 				B658FB3C27DA9E1000EA4DBD /* CodeEditTests */,
-				B658FB4627DA9E1000EA4DBD /* CodeEditUITests */,
-				2BE487EB28245162003F3F64 /* OpenWithXLab */,
+				B658FB4627DA9E1000EA4DBD /* CodeOffUITests */,
+				2BE487EB28245162003F3F64 /* OpenWithCodeOff */,
 			);
 		};
 /* End PBXProject section */
@@ -531,7 +531,7 @@
 /* Begin PBXTargetDependency section */
 		2BE487F328245162003F3F64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2BE487EB28245162003F3F64 /* OpenWithXLab */;
+			target = 2BE487EB28245162003F3F64 /* OpenWithCodeOff */;
 			targetProxy = 2BE487F228245162003F3F64 /* PBXContainerItemProxy */;
 		};
 		6C7B1C762A1D57CE005CBBFC /* PBXTargetDependency */ = {
@@ -540,12 +540,12 @@
 		};
 		B658FB3F27DA9E1000EA4DBD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B658FB2B27DA9E0F00EA4DBD /* XLab */;
+			target = B658FB2B27DA9E0F00EA4DBD /* CodeOff */;
 			targetProxy = B658FB3E27DA9E1000EA4DBD /* PBXContainerItemProxy */;
 		};
 		B658FB4927DA9E1000EA4DBD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B658FB2B27DA9E0F00EA4DBD /* XLab */;
+			target = B658FB2B27DA9E0F00EA4DBD /* CodeOff */;
 			targetProxy = B658FB4827DA9E1000EA4DBD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -624,12 +624,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "${CE_APPICON_NAME}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CodeEdit/CodeEdit.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development: Raethan Christian Supatan (MQ8995N78Z)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeEdit/Preview Content\"";
 				DEVELOPMENT_TEAM = MN6HX9XJV8;
@@ -638,15 +639,15 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CodeEdit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 XLab";
-				INFOPLIST_KEY_NSPrincipalClass = XLab.XLabApplication;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 CodeOff";
+				INFOPLIST_KEY_NSPrincipalClass = CodeOff.CodeOffApplicaion;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "Change in Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = NO;
@@ -663,6 +664,7 @@
 			baseConfigurationReferenceRelativePath = Alpha.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -676,7 +678,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -690,7 +692,7 @@
 			baseConfigurationReferenceRelativePath = Alpha.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -703,7 +705,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -728,7 +730,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenWithCodeEdit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeEdit;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeOff;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -738,7 +740,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.OpenWithCodeEdit;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.OpenWithCodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -819,12 +821,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "${CE_APPICON_NAME}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CodeEdit/CodeEdit.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development: Raethan Christian Supatan (MQ8995N78Z)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeEdit/Preview Content\"";
 				DEVELOPMENT_TEAM = MN6HX9XJV8;
@@ -833,15 +836,15 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CodeEdit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 XLab";
-				INFOPLIST_KEY_NSPrincipalClass = XLab.XLabApplication;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 CodeOff";
+				INFOPLIST_KEY_NSPrincipalClass = CodeOff.CodeOffApplicaion;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "Change in Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = NO;
@@ -858,6 +861,7 @@
 			baseConfigurationReferenceRelativePath = Beta.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -871,7 +875,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -885,7 +889,7 @@
 			baseConfigurationReferenceRelativePath = Beta.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -898,7 +902,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -923,7 +927,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenWithCodeEdit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeEdit;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeOff;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -933,7 +937,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.OpenWithCodeEdit;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.OpenWithCodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -957,7 +961,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenWithCodeEdit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeEdit;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeOff;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -967,7 +971,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.OpenWithCodeEdit;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.OpenWithCodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -991,7 +995,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenWithCodeEdit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeEdit;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeOff;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1001,7 +1005,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.OpenWithCodeEdit;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.OpenWithCodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1083,13 +1087,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "${CE_APPICON_NAME}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CE_APPICON_NAME = AppIconPre;
 				CODE_SIGN_ENTITLEMENTS = CodeEdit/CodeEdit.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development: Raethan Christian Supatan (MQ8995N78Z)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeEdit/Preview Content\"";
 				DEVELOPMENT_TEAM = MN6HX9XJV8;
@@ -1098,15 +1103,15 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CodeEdit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 XLab";
-				INFOPLIST_KEY_NSPrincipalClass = XLab.XLabApplication;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 CodeOff";
+				INFOPLIST_KEY_NSPrincipalClass = CodeOff.CodeOffApplicaion;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "Change in Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = NO;
@@ -1123,6 +1128,7 @@
 			baseConfigurationReferenceRelativePath = Alpha.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -1136,7 +1142,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1150,7 +1156,7 @@
 			baseConfigurationReferenceRelativePath = Alpha.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -1163,7 +1169,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1188,7 +1194,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = OpenWithCodeEdit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeEdit;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenWithCodeOff;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1198,7 +1204,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.OpenWithCodeEdit;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.OpenWithCodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1350,13 +1356,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "${CE_APPICON_NAME}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CodeEdit/CodeEdit.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development: Raethan Christian Supatan (MQ8995N78Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeEdit/Preview Content\"";
 				DEVELOPMENT_TEAM = MN6HX9XJV8;
@@ -1365,15 +1372,15 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CodeEdit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 XLab";
-				INFOPLIST_KEY_NSPrincipalClass = XLab.XLabApplication;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 CodeOff";
+				INFOPLIST_KEY_NSPrincipalClass = CodeOff.CodeOffApplicaion;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "Change in Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = NO;
@@ -1391,12 +1398,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "${CE_APPICON_NAME}";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = CodeEdit/CodeEdit.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development: Raethan Christian Supatan (MQ8995N78Z)";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"CodeEdit/Preview Content\"";
 				DEVELOPMENT_TEAM = MN6HX9XJV8;
@@ -1405,15 +1413,15 @@
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = CodeEdit/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 XLab";
-				INFOPLIST_KEY_NSPrincipalClass = XLab.XLabApplication;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 CodeOff";
+				INFOPLIST_KEY_NSPrincipalClass = CodeOff.CodeOffApplicaion;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = "Change in Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUN_DOCUMENTATION_COMPILER = NO;
@@ -1430,6 +1438,7 @@
 			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -1443,7 +1452,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1457,6 +1466,7 @@
 			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -1470,7 +1480,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditTests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1484,7 +1494,7 @@
 			baseConfigurationReferenceRelativePath = Debug.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -1497,7 +1507,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1513,7 +1523,7 @@
 			baseConfigurationReferenceRelativePath = Release.xcconfig;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 45;
@@ -1526,7 +1536,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.XLab.CodeEditUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = app.lizter.CodeOff.CodeOffUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -1538,7 +1548,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2BE487F828245162003F3F64 /* Build configuration list for PBXNativeTarget "OpenWithXLab" */ = {
+		2BE487F828245162003F3F64 /* Build configuration list for PBXNativeTarget "OpenWithCodeOff" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2BE487F628245162003F3F64 /* Debug */,
@@ -1562,7 +1572,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B658FB5127DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "XLab" */ = {
+		B658FB5127DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "CodeOff" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B658FB5227DA9E1000EA4DBD /* Debug */,
@@ -1586,7 +1596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B658FB5727DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "CodeEditUITests" */ = {
+		B658FB5727DA9E1000EA4DBD /* Build configuration list for PBXNativeTarget "CodeOffUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B658FB5827DA9E1000EA4DBD /* Debug */,

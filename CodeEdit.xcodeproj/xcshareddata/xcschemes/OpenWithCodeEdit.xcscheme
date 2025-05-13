@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BE487EB28245162003F3F64"
-               BuildableName = "OpenWithXLab.appex"
-               BlueprintName = "OpenWithXLab"
+               BuildableName = "OpenWithCodeOff.appex"
+               BlueprintName = "OpenWithCodeOff"
                ReferencedContainer = "container:CodeEdit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -31,8 +31,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
-               BuildableName = "XLab.app"
-               BlueprintName = "XLab"
+               BuildableName = "CodeOff.app"
+               BlueprintName = "CodeOff"
                ReferencedContainer = "container:CodeEdit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
-            BuildableName = "XLab.app"
-            BlueprintName = "XLab"
+            BuildableName = "CodeOff.app"
+            BlueprintName = "CodeOff"
             ReferencedContainer = "container:CodeEdit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B658FB2B27DA9E0F00EA4DBD"
-            BuildableName = "XLab.app"
-            BlueprintName = "XLab"
+            BuildableName = "CodeOff.app"
+            BlueprintName = "CodeOff"
             ReferencedContainer = "container:CodeEdit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

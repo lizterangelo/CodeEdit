@@ -14,7 +14,7 @@ struct MainCommands: Commands {
 
     var body: some Commands {
         CommandGroup(replacing: .appInfo) {
-            Button("About XLab") {
+            Button("About CodeOff") {
                 openWindow(sceneID: .about)
             }
 

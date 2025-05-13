@@ -8,6 +8,7 @@ final class BackgroundAIService: ObservableObject {
     
     private var process: Process?
     private var apiKey: String = ""
+    private var aiderCommands: String = ""
     private var workspacePath: String?
     private var workspaceID: UUID // Add a unique identifier for each workspace
     private var terminalOutput: String = ""
@@ -33,11 +34,12 @@ final class BackgroundAIService: ObservableObject {
         self.workspacePath = workspacePath
         self.localhostURL = nil
         
-        // Fetch API key and start the service
-        fetchApiKey { [weak self] key in
-            guard let self = self, !key.isEmpty else { return }
+        // Fetch API key and aider commands, then start the service
+        fetchApiKeyAndCommands { [weak self] (key, commands) in
+            guard let self = self, !key.isEmpty, !commands.isEmpty else { return }
             
             self.apiKey = key
+            self.aiderCommands = commands
             self.copyQAInstructionsToWorkspace { success in
                 if success {
                     self.runAiderCommand()
@@ -59,36 +61,67 @@ final class BackgroundAIService: ObservableObject {
         print("Background AI service stopped for workspace: \(workspaceID)")
     }
     
-    /// Fetch the API key from the cloud function
-    private func fetchApiKey(completion: @escaping (String) -> Void) {
-        // URL to your Google Cloud Function
-        guard let url = URL(string: "https://pythoninstallation-369680016890.us-central1.run.app") else {
-            print("Error: Invalid API URL")
-            completion("")
+    /// Fetch the API key and aider commands from the cloud function
+    private func fetchApiKeyAndCommands(completion: @escaping (String, String) -> Void) {
+        // URL to your Google Cloud Functions
+        let apiKeyURL = URL(string: "https://pythoninstallation-369680016890.us-central1.run.app")
+        let commandsURL = URL(string: "https://aidercommands-369680016890.us-central1.run.app")
+        
+        guard let apiKeyURL = apiKeyURL else {
+            print("Error: Invalid API key URL")
+            completion("", "")
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        // First fetch the API key
+        let apiKeyTask = URLSession.shared.dataTask(with: apiKeyURL) { [weak self] data, response, error in
             if let error = error {
                 print("Error fetching API key: \(error.localizedDescription)")
-                completion("")
+                completion("", "")
                 return
             }
             
             guard let data = data,
                   let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let apiKey = jsonResponse["pythonCode"] as? String else {
-                print("Error: Invalid response format")
-                completion("")
+                print("Error: Invalid response format for API key")
+                completion("", "")
                 return
             }
             
-            print("API key fetched successfully")
-            completion(apiKey)
+            // Now fetch the aider commands
+            guard let commandsURL = commandsURL else {
+                print("Error: Invalid commands URL")
+                completion(apiKey, "")
+                return
+            }
+            
+            let commandsTask = URLSession.shared.dataTask(with: commandsURL) { data, response, error in
+                if let error = error {
+                    print("Error fetching aider commands: \(error.localizedDescription)")
+                    completion(apiKey, "")
+                    return
+                }
+                
+                guard let data = data,
+                      let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                      let commands = jsonResponse["commands"] as? String else {
+                    print("Error: Invalid response format for aider commands")
+                    // Fallback to default commands if we can't fetch them
+                    let defaultCommands = "--model gemini/gemini-2.5-flash-preview-04-17 --read .aider.qa_instructions.md --no-auto-commits --gitignore --browser"
+                    completion(apiKey, defaultCommands)
+                    return
+                }
+                
+                print("API key and aider commands fetched successfully")
+                completion(apiKey, commands)
+            }
+            
+            commandsTask.resume()
         }
         
-        print("Fetching API key...")
-        task.resume()
+        print("Fetching API key and aider commands...")
+        apiKeyTask.resume()
     }
     
     /// Copy QA instructions to the workspace
@@ -130,11 +163,6 @@ final class BackgroundAIService: ObservableObject {
         // Get the home directory path dynamically for the current user
         let homeDirectory = FileManager.default.homeDirectoryForCurrentUser.path
         let aiderPath = "\(homeDirectory)/.local/bin/aider"
-        let aiModel = "--model gemini/gemini-2.5-flash-preview-04-17"
-        let read = "--read .aider.qa_instructions.md"
-        let commits = "--no-auto-commits"
-        let gitignore = "--gitignore"
-        
         
         print("Starting background AI service with Aider for workspace: \(workspaceID)...")
         
@@ -144,8 +172,7 @@ final class BackgroundAIService: ObservableObject {
         
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
         // Set the GEMINI_API_KEY environment variable before running the command
-        // Note: We're now using --browser flag to open the web interface
-        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) \(aiModel) \(read) --browser \(commits) --gitignore"]
+        process.arguments = ["bash", "-c", "export GEMINI_API_KEY=\(apiKey) && cd \(workspacePath) && \(aiderPath) \(aiderCommands)"]
         process.standardOutput = pipe
         process.standardError = pipe
         
